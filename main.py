@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # /usr/bin/env python3
-
-import requests
 import argparse
 from src.crawler import Crawler
+from apscheduler.schedulers.blocking import BlockingScheduler
+
 
 parser = argparse.ArgumentParser(
     prog="LeetCode-submissions-crawler", description="Get all your submissions!"
@@ -22,4 +22,6 @@ parser.add_argument(
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    Crawler(args).execute()
+    scheduler = BlockingScheduler()
+    scheduler.add_job(Crawler(args).execute, 'interval', seconds=1) 
+    scheduler.start()
