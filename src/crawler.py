@@ -23,6 +23,7 @@ class Crawler:
             self.OUTPUT_DIR = args.output if args.output else config["output_dir"]
             self.TIME_CONTROL = 3600 * 24 * (args.day if args.day else config["day"])
             self.OVERWRITE = args.overwrite
+            self.PUSH_DIR = config["push_dir"]
         self.c = 0
         self.visited = {}
         self.problems_to_be_reprocessed = []
@@ -82,6 +83,7 @@ class Crawler:
             full_path = generate_path(
                 problem_frontendId, problem_title, submission["lang"], self.OUTPUT_DIR
             )
+            logger.info(full_path)
             if not self.OVERWRITE and os.path.exists(full_path):
                 return
             self.save_code(
@@ -167,7 +169,7 @@ class Crawler:
         logger.info("Start scrapping")
         self.scraping()
         logger.info("End scrapping \n")
-        gitPush(self.OUTPUT_DIR)
+        gitPush(self.PUSH_DIR)
 
 
 if __name__ == "__main__":

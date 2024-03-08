@@ -67,9 +67,9 @@ def generate_path(problem_id, problem_title, submission_language, OUTPUT_DIR):
     return os.path.join(pathname, filename)
 
 
-def gitPush(OUTPUT_DIR):
+def gitPush(PUSH_DIR):
     today = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-    os.chdir(OUTPUT_DIR)
+    os.chdir(PUSH_DIR)
     instructions = [
         "git add .",
         "git status",
