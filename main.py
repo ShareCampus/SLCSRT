@@ -22,6 +22,7 @@ parser.add_argument(
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    scheduler = BlockingScheduler()
-    scheduler.add_job(Crawler(args).execute, 'interval', hours=24) 
-    scheduler.start()
+    # scheduler = BlockingScheduler()
+    Crawler(args).execute()
+    # scheduler.add_job(Crawler(args).execute, 'interval', hours=24) 
+    # scheduler.start()
